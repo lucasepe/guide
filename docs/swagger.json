@@ -1,0 +1,49 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server.",
+        "title": "Hello World API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/greet": {
+            "get": {
+                "description": "get a greeting message",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Greet the user",
+                "operationId": "greet",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Name to greet",
+                        "name": "name",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.Greeting"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.Greeting": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

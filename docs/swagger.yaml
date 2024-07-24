@@ -1,0 +1,32 @@
+basePath: /
+definitions:
+  main.Greeting:
+    properties:
+      message:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a sample server.
+  title: Hello World API
+  version: "1.0"
+paths:
+  /greet:
+    get:
+      description: get a greeting message
+      operationId: greet
+      parameters:
+      - description: Name to greet
+        in: query
+        name: name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Greeting'
+      summary: Greet the user
+swagger: "2.0"
