@@ -41,7 +41,7 @@ func greetHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-//go:cover ignore
+// codecov ignore
 func main() {
 	http.HandleFunc("/greet", greetHandler)
 
