@@ -41,11 +41,19 @@ func greetHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
+// NewServer creates and returns a new HTTP server with the given handler
+func NewServer() *http.Server {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/greet", greetHandler)
+	mux.Handle("/swagger/", httpSwagger.WrapHandler)
+
+	return &http.Server{
+		Addr:    ":8080",
+		Handler: mux,
+	}
+}
+
 func main() {
-	http.HandleFunc("/greet", greetHandler)
-
-	// Swagger endpoint
-	http.Handle("/swagger/", httpSwagger.WrapHandler)
-
-	http.ListenAndServe(":8080", nil)
+	server := NewServer()
+	server.ListenAndServe()
 }
