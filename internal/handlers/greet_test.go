@@ -1,4 +1,4 @@
-package main
+package handlers
 
 import (
 	"encoding/json"
@@ -10,7 +10,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestGreetHandlerWithName(t *testing.T) {
+func TestGreetWithName(t *testing.T) {
 	exp := Greeting{
 		Message: "Hello, Krateo!",
 	}
@@ -18,7 +18,7 @@ func TestGreetHandlerWithName(t *testing.T) {
 	req := httptest.NewRequest(http.MethodGet, "/greet?name=Krateo", nil)
 
 	w := httptest.NewRecorder()
-	greetHandler(w, req)
+	Greet(w, req)
 
 	resp := w.Result()
 	if resp != nil {
@@ -40,7 +40,7 @@ func TestGreetHandlerWithName(t *testing.T) {
 	}
 }
 
-func TestGreetHandlerWithNoName(t *testing.T) {
+func TestGreetWithNoName(t *testing.T) {
 	exp := Greeting{
 		Message: "Hello, World!",
 	}
@@ -48,7 +48,7 @@ func TestGreetHandlerWithNoName(t *testing.T) {
 	req := httptest.NewRequest(http.MethodGet, "/greet", nil)
 
 	w := httptest.NewRecorder()
-	greetHandler(w, req)
+	Greet(w, req)
 
 	resp := w.Result()
 	if resp != nil {
@@ -58,36 +58,6 @@ func TestGreetHandlerWithNoName(t *testing.T) {
 	dat, err := io.ReadAll(resp.Body)
 	if err != nil {
 		t.Errorf("Error: %v", err)
-	}
-
-	got := Greeting{}
-	if err := json.Unmarshal(dat, &got); err != nil {
-		t.Errorf("Error: %v", err)
-	}
-
-	if !cmp.Equal(got, exp) {
-		t.Errorf("got: %v, expected: %v", got, exp)
-	}
-}
-
-func TestServer(t *testing.T) {
-	exp := Greeting{
-		Message: "Hello, World!",
-	}
-
-	server := httptest.NewServer(NewServer().Handler)
-	defer server.Close()
-
-	resp, err := http.Get(server.URL + "/greet")
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer resp.Body.Close()
-
-	// Leggi il corpo della risposta
-	dat, err := io.ReadAll(resp.Body)
-	if err != nil {
-		t.Fatal(err)
 	}
 
 	got := Greeting{}
