@@ -3,5 +3,5 @@ github.com/lucasepe/guide/docs/docs.go:71.13,73.2 1 0
 github.com/lucasepe/guide/main.go:32.59,34.16 2 1
 github.com/lucasepe/guide/main.go:34.16,36.3 1 0
 github.com/lucasepe/guide/main.go:38.2,41.37 4 1
-github.com/lucasepe/guide/main.go:44.13,51.2 3 0
+github.com/lucasepe/guide/main.go:45.13,52.2 3 0
 github.com/lucasepe/guide/docs/docs.go:71.13,73.2 1 1
